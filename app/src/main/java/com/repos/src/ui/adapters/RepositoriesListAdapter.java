@@ -29,20 +29,6 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
         mItems = new ArrayList<>();
     }
 
-    public void setData(List<Repository> data) {
-        mItems.clear();
-        mItems.addAll(data);
-
-        notifyDataSetChanged();
-    }
-
-    public Repository getItem(int position) {
-
-        if (mItems == null)
-            return null;
-        return mItems.get(position);
-    }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.list_item_repository, parent, false);
@@ -60,6 +46,20 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    public void setData(List<Repository> data) {
+        mItems.clear();
+        mItems.addAll(data);
+
+        notifyDataSetChanged();
+    }
+
+    public Repository getItem(int position) {
+
+        if (mItems == null)
+            return null;
+        return mItems.get(position);
     }
 
     static final class RepoListItemViewHolder extends RecyclerView.ViewHolder {

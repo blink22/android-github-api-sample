@@ -61,6 +61,21 @@ public class RepositoriesListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        // Cancel web call
+
+        if (mListReposCallback != null)
+            mListReposCallback.cancel();
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        mActivity = null;
+        super.onDetach();
+    }
+
     private void initialize() {
         // Fetch repos
 
@@ -85,21 +100,6 @@ public class RepositoriesListFragment extends Fragment {
         repositoriesListAdapter.setData(repos);
         reposRecyclerView.setAdapter(repositoriesListAdapter);
         progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onDestroyView() {
-        // Cancel web call
-
-        if (mListReposCallback != null)
-            mListReposCallback.cancel();
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDetach() {
-        mActivity = null;
-        super.onDetach();
     }
 
     private class ListReposCallback extends ApiBuilder.CancelableCallback<List<Repository>> {
