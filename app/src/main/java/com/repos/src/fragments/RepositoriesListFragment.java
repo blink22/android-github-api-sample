@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.repos.src.R;
 import com.repos.src.controllers.ApiBuilder;
 import com.repos.src.controllers.ApplicationController;
-import com.repos.src.models.Owner;
+import com.repos.src.models.User;
 import com.repos.src.models.Repository;
 import com.repos.src.orm.RepositoriesDao;
 import com.repos.src.services.GitHubService;
@@ -53,8 +53,7 @@ public class RepositoriesListFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repositories_list, container, false);
         ButterKnife.bind(this, view);
         initialize();
@@ -88,7 +87,7 @@ public class RepositoriesListFragment extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
             mGitHubService = ApiBuilder.obtainGitHubServiceService();
             mListReposCallback = new ListReposCallback();
-            mGitHubService.listRepositories(Owner.GITHUB_DEFAULT_USER).enqueue(mListReposCallback);
+            mGitHubService.listRepositories(User.GITHUB_DEFAULT_USER).enqueue(mListReposCallback);
         }
     }
 

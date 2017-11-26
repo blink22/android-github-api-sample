@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Ayman Mahgoub on 2/20/16.
  */
-public class Owner extends RealmObject {
+public class User extends RealmObject {
 
     public static final String GITHUB_DEFAULT_USER = "octocat";
 
@@ -24,7 +24,7 @@ public class Owner extends RealmObject {
     @SerializedName("html_url")
     private String link;
 
-    public Owner() {
+    public User() {
     }
 
     public int getId() {
