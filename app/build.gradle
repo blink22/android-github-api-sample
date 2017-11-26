@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
@@ -21,11 +23,15 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 def RETROFIT_VERSION = '2.0.0-beta2'
 def SUPPORT_VERSION = '23.1.1'
-def REALM_VERSION = '0.87.4'
 def PICASSO_VERSION = '2.5.2'
 def BUTTER_KNIFE_VERSION = '7.0.1'
 def MAKERAMEN_VERSION = '1.5.0'
@@ -42,8 +48,6 @@ dependencies {
     // Use Retrofit Frame ass http client
     compile "com.squareup.retrofit:retrofit:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit:converter-gson:${RETROFIT_VERSION}"
-    // Use Realm framework for persistence layer
-    compile "io.realm:realm-android:${REALM_VERSION}"
     // For Downloading and caching images
     compile "com.squareup.picasso:picasso:${PICASSO_VERSION}"
     // For view injections

@@ -28,5 +28,6 @@ public class ApplicationController extends Application {
         super.onCreate();
         // any generic initialization code
         instance = this;
+        RealmController.init(this);
     }
 }

@@ -81,7 +81,7 @@ public class RepositoriesListFragment extends Fragment {
         if (!ApplicationController.isNetworkAvailable()) {
             // bring it from realm
             RepositoriesDao repositoriesDao = RepositoriesDao.getInstance();
-            repos = repositoriesDao.findAll(mActivity);
+            repos = repositoriesDao.findAll();
             setUIValues();
         } else {
             progressBar.setVisibility(View.VISIBLE);
@@ -110,7 +110,7 @@ public class RepositoriesListFragment extends Fragment {
                 repos = response.body();
                 // save data into realm
                 RepositoriesDao repositoriesDao = RepositoriesDao.getInstance();
-                repositoriesDao.insertAll(repos, mActivity);
+                repositoriesDao.insertOrUpdate(repos);
                 setUIValues();
             }
         }
