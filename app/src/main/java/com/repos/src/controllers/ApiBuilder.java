@@ -5,6 +5,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.repos.src.services.GitHubService;
+import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -48,11 +49,18 @@ public class ApiBuilder {
         CLIENT.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                Request.Builder request = chain.request()
-                        .newBuilder();
-                Response response = chain.proceed(request.build());
+                Request original = chain.request();
+                HttpUrl originalHttpUrl = original.httpUrl();
 
-                return response;
+                HttpUrl url = originalHttpUrl.newBuilder()
+                        .addQueryParameter("access_token", Constants.ACCESS_TOKEN)
+                        .build();
+
+                Request.Builder requestBuilder = original.newBuilder()
+                        .url(url);
+
+                Request request = requestBuilder.build();
+                return chain.proceed(request);
             }
         });
     }

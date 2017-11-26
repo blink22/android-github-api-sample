@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Github Manager Sample</string>
     <string name="action_settings">Settings</string>
+
+    <string name="num_commits_string">Number of commits: %1$d</string>
+    <string name="project_owner_string">By %1$s</string>
+    <string name="contributors_string">Contributors</string>
+    <string name="projects_string">Projects</string>
 </resources>
