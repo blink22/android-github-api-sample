@@ -24,6 +24,8 @@ public class User extends RealmObject {
     @SerializedName("html_url")
     private String link;
 
+    private int contributions;
+
     public User() {
     }
 
@@ -57,5 +59,13 @@ public class User extends RealmObject {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public int getContributions() {
+        return contributions;
+    }
+
+    public void setContributions(int contributions) {
+        this.contributions = contributions;
     }
 }
