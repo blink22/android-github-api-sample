@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.github.repos.src"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+def RETROFIT_VERSION = '2.0.0-beta2'
+def SUPPORT_VERSION = '23.1.1'
+def REALM_VERSION = '0.87.4'
+def PICASSO_VERSION = '2.5.2'
+def BUTTER_KNIFE_VERSION = '7.0.1'
+def MAKERAMEN_VERSION = '1.5.0'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    // New Material design libraries for themes and designs
+    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:design:${SUPPORT_VERSION}"
+    // New Material design libraries for lists and cards
+    compile "com.android.support:cardview-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
+    // Use Retrofit Frame ass http client
+    compile "com.squareup.retrofit:retrofit:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit:converter-gson:${RETROFIT_VERSION}"
+    // Use Realm framework for persistence layer
+    compile "io.realm:realm-android:${REALM_VERSION}"
+    // For Downloading and caching images
+    compile "com.squareup.picasso:picasso:${PICASSO_VERSION}"
+    // For view injections
+    compile "com.jakewharton:butterknife:${BUTTER_KNIFE_VERSION}"
+    // For Rounded ImageView
+    compile "com.makeramen:roundedimageview:${MAKERAMEN_VERSION}"
+}

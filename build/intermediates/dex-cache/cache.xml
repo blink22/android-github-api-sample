@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/converter-gson/2.0.0-beta2/392c3d09e0f5e7087544093cc0cb23bb9c7af5fa/converter-gson-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="392c3d09e0f5e7087544093cc0cb23bb9c7af5fa">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/converter-gson-2.0.0-beta2-99bf4fe2ad47480e33adbd7e56d74d0c7f989a75.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-af3ce7a34816fdb2bdd86a59e6115ba050b11531.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/1.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2f7dddedcdb3facde33de103dcc32b10c43b92e">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-36e5c5cdb54a3aa73875e948c893e43693498f14.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-d0b9638b8f53770b2a365649459cb6c0ab923a40.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/io.realm/realm-android/0.87.4/97d167507fcf75bc96d2123af0f3b1b5614ca3b7/realm-android-0.87.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="97d167507fcf75bc96d2123af0f3b1b5614ca3b7">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/realm-android-0.87.4-9fb81ca20ecf9cec727a915724eedb254239d908.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/butterknife-7.0.1-3341c2b25fc2a2ef9775d79ce6be25172be34aca.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-4638928c08a2a0e188303f539c97cd3049dc3e39.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-ae5d5b5bc205d93d47e6a02430425b1213c67d3e.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/okhttp-2.5.0-cb1b084a6549094b8d4e21e7bc141b20aeeaf12a.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/Android/SDK_For_Android_Studio/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-fcec46533aabb15ee9670f5d71a70d3b63bb02cc.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/2.0.0-beta2/880d9e0997b2d1bfc98e0d121ced33ee5d04aac4/retrofit-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="880d9e0997b2d1bfc98e0d121ced33ee5d04aac4">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/retrofit-2.0.0-beta2-7a496c152fce076c299e00b62ff0ce6069624a21.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/okio-1.6.0-8b1b73958f7a9a6b4950bd35b99bf0cc0c3f9dc4.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/gson-2.3.1-e5fbadb43af44d450021f20d17de290bad8a44d2.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-22f97ed3086a0584a332d8b6a51606b7e562ceae.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-83b8f48a66d490d986bd6b30dcdb53daf0cce8b4.jar" />
+    </item>
+    <item
+        jar="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/Users/aymanadelabdelaziz/Documents/android-workspace/ayman_mahgoub-password-manager-sample-226fe6a41002/app/build/intermediates/pre-dexed/debug/classes-d932d2b2e9fa7094be1588e94443e39e09ef569f.jar" />
+    </item>
+
+</items>
