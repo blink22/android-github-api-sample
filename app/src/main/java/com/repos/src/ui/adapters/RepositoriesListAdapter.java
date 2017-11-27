@@ -23,9 +23,11 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private final LayoutInflater mInflater;
     private List<Repository> mItems;
+    private RepoSelectedCallBack repoSelectedCallBack;
 
-    public RepositoriesListAdapter(Context context) {
+    public RepositoriesListAdapter(RepoSelectedCallBack repoSelectedCallBack, Context context) {
         this.mInflater = LayoutInflater.from(context);
+        this.repoSelectedCallBack = repoSelectedCallBack;
         mItems = new ArrayList<>();
     }
 
@@ -62,24 +64,39 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mItems.get(position);
     }
 
-    static final class RepoListItemViewHolder extends RecyclerView.ViewHolder {
+    public class RepoListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.repo_name)
-        TextView repoName;
+        TextView repoNameTextView;
 
         @Bind(R.id.repo_description)
         TextView repoDescription;
 
+        private String repoName;
+
         public RepoListItemViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ButterKnife.bind(this, itemView);
         }
 
         void bind(Repository repository) {
             String name = repository.getName();
             String description = repository.getDescription();
-            repoName.setText(name);
+            this.repoName = repository.getName();
+            repoNameTextView.setText(name);
             repoDescription.setText(description);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (repoSelectedCallBack == null)
+                return;
+            repoSelectedCallBack.onRepoItemSelected(repoName);
+        }
+    }
+
+    public interface RepoSelectedCallBack {
+        void onRepoItemSelected(String repoId);
     }
 }

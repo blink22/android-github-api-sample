@@ -1,27 +1,28 @@
 package com.repos.src.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.repos.src.R;
+import com.repos.src.activities.RepoDetailsActivity;
 import com.repos.src.controllers.ApiBuilder;
 import com.repos.src.controllers.ApplicationController;
-import com.repos.src.models.User;
 import com.repos.src.models.Repository;
+import com.repos.src.models.User;
 import com.repos.src.orm.RepositoriesDao;
 import com.repos.src.services.GitHubService;
 import com.repos.src.ui.adapters.RepositoriesListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -29,7 +30,8 @@ import butterknife.ButterKnife;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class RepositoriesListFragment extends Fragment {
+@FragmentWithArgs
+public class RepositoriesListFragment extends Fragment implements RepositoriesListAdapter.RepoSelectedCallBack {
 
     @Bind(R.id.repos_list_view)
     RecyclerView reposRecyclerView;
@@ -40,15 +42,7 @@ public class RepositoriesListFragment extends Fragment {
     private GitHubService mGitHubService;
     private FragmentActivity mActivity;
     private ListReposCallback mListReposCallback;
-    private ListRepoContributors mListRepoContributors;
     private List<Repository> repos;
-
-    private List<User> contributors = new ArrayList<>();
-
-    public static RepositoriesListFragment getInstance() {
-        RepositoriesListFragment repositoriesListFragment = new RepositoriesListFragment();
-        return repositoriesListFragment;
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -72,8 +66,6 @@ public class RepositoriesListFragment extends Fragment {
         if (mListReposCallback != null)
             mListReposCallback.cancel();
 
-        if (mListRepoContributors != null)
-            mListRepoContributors.cancel();
         super.onDestroyView();
     }
 
@@ -95,11 +87,7 @@ public class RepositoriesListFragment extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
             mGitHubService = ApiBuilder.obtainGitHubServiceService();
             mListReposCallback = new ListReposCallback();
-            mListRepoContributors = new ListRepoContributors();
             mGitHubService.listRepositories(User.GITHUB_DEFAULT_USER).enqueue(mListReposCallback);
-
-            for(int page=0; page<100; page++)
-                mGitHubService.listContributors("octocat", "linguist", page).enqueue(mListRepoContributors);
         }
     }
 
@@ -107,10 +95,16 @@ public class RepositoriesListFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         reposRecyclerView.setLayoutManager(linearLayoutManager);
 
-        RepositoriesListAdapter repositoriesListAdapter = new RepositoriesListAdapter(mActivity);
+        RepositoriesListAdapter repositoriesListAdapter = new RepositoriesListAdapter(this, mActivity);
         repositoriesListAdapter.setData(repos);
         reposRecyclerView.setAdapter(repositoriesListAdapter);
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onRepoItemSelected(String repoId) {
+        Intent intent = RepoDetailsActivity.newIntent(getActivity(), repoId);
+        getActivity().startActivity(intent);
     }
 
     private class ListReposCallback extends ApiBuilder.CancelableCallback<List<Repository>> {
@@ -131,21 +125,6 @@ public class RepositoriesListFragment extends Fragment {
         protected void failure(Throwable exception) {
             progressBar.setVisibility(View.GONE);
             // TODO: handle error message and display to user
-        }
-    }
-
-    private class ListRepoContributors extends ApiBuilder.CancelableCallback<List<User>> {
-        @Override
-        protected void success(Response<List<User>> response, Retrofit retrofit) {
-            if(response.isSuccess()){
-                contributors.addAll(response.body());
-                Log.d("TESTO", ""+contributors.size());
-            }
-        }
-
-        @Override
-        protected void failure(Throwable t) {
-
         }
     }
 }
