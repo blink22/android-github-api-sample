@@ -1,13 +1,12 @@
 package com.repos.src.orm;
 
-import android.content.Context;
+import android.support.annotation.Nullable;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -17,80 +16,100 @@ import io.realm.RealmResults;
  */
 public abstract class GenericDao<Type extends RealmObject> {
 
-    private static Context context;
-    private Realm realm;
-
-    private Class<Type> getRealmClass() {
+    private Class<Type> retrieveItemClass() {
         return (Class<Type>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public void insertAll(List<Type> list, Context context) {
-        Realm realm = getRealmInstance(context);
-        realm.beginTransaction();
 
-        if (list != null) {
+    public void insertOrUpdate(List<Type> items) {
+        if (items == null || items.isEmpty())
+            return;
 
-            for (Type type : list) {
-
-                try {
-                    realm.copyToRealmOrUpdate(type);
-                } catch (IllegalArgumentException exception) {
-                    exception.printStackTrace();
-                }
-            }
-        }
-        realm.commitTransaction();
-        realm.close();
-    }
-
-    public ArrayList<Type> findAll(Context context) {
-        Realm realm = getRealmInstance(context);
-        realm.beginTransaction();
-        Class<Type> realmClass = getRealmClass();
-        RealmQuery<Type> query = realm.where(realmClass);
-        RealmResults<Type> result = query.findAll();
-        realm.commitTransaction();
-        ArrayList<Type> results = convertRealmResults(realm, result);
-        realm.close();
-        return results;
-    }
-
-    public Type findById(Realm realm, int id) {
-        Class<Type> realmClass = (Class<Type>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
-        String originalEntityClassName = realmClass.getName();
-        String[] originalEntityClassNameTokens = originalEntityClassName.split("\\.");
-        originalEntityClassName = originalEntityClassNameTokens[originalEntityClassNameTokens.length - 1];
-        originalEntityClassName = originalEntityClassName.toLowerCase();
-        Type searchResult = null;
-
-        if (id <= 0)
-            return searchResult;
-
-        //Get By Id
-        RealmQuery<Type> query = realm.where(realmClass).equalTo(originalEntityClassName + "Id", id);
-        RealmResults<Type> results = query.findAll();
-
-        if (results == null || results.size() == 0)
-            return searchResult;
-        Type result = results.get(0);
-        return result;
-    }
-
-    private ArrayList<Type> convertRealmResults(Realm realm, RealmResults<Type> result) {
-        // Parse ObjectRealm to Object
-        ArrayList<Type> allObjects = new ArrayList<>();
-
-        for (Type type : result) {
-            Type converted = realm.copyFromRealm(type);
-            allObjects.add(converted);
-        }
-        return allObjects;
-    }
-
-    private Realm getRealmInstance(Context context) {
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(context).build());
         Realm realm = Realm.getDefaultInstance();
-        return realm;
+        realm.executeTransaction(realmParam -> {
+            for (Type item : items) {
+                realmParam.insertOrUpdate(item);
+            }
+        });
+        realm.close();
+    }
+
+    public void insertOrUpdate(Type item) {
+        if (item == null)
+            return;
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realmParam -> {
+            realmParam.insertOrUpdate(item);
+        });
+        realm.close();
+    }
+
+    /**
+     * Used when it's required to find items which has certain value for a certain column.
+     * using null for fieldName or fieldValue returns all items.
+     *
+     * @param fieldName
+     * @param fieldValue
+     * @return
+     */
+    public List<Type> find(@Nullable String fieldName, @Nullable Long fieldValue) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Type> results = findAllResults(realm, fieldName, fieldValue);
+        List<Type> items = extractItemsFromResults(realm, results);
+        realm.close();
+        return items;
+    }
+
+    public List<Type> findAll() {
+        return find(null, null);
+    }
+
+    public void deleteAll(@Nullable String fieldName, @Nullable Long fieldValue) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Type> results = findAllResults(realm, fieldName, fieldValue);
+
+        if (!results.isEmpty()) {
+            realm.executeTransaction(realmParam -> {
+                results.deleteAllFromRealm();
+            });
+        }
+        realm.close();
+    }
+
+    private RealmResults<Type> findAllResults(Realm realm, @Nullable String fieldName, @Nullable Long fieldValue) {
+        RealmQuery<Type> query = realm.where(retrieveItemClass());
+
+        if (fieldName != null && fieldValue != null) {
+            query.equalTo(fieldName, fieldValue);
+        }
+        return query.findAll();
+    }
+
+    protected List<Type> extractItemsFromResults(Realm realm, RealmResults<Type> results) {
+        List<Type> items = new ArrayList<Type>();
+
+        for (Type result : results) {
+            Type item = realm.copyFromRealm(result);
+            extractInverselyLinkedData(realm, item, result);
+            items.add(item);
+        }
+        return items;
+    }
+
+    abstract void extractInverselyLinkedData(Realm realm, Type item, Type result);
+
+    public int getNextId() {
+        try {
+            Realm realm = Realm.getDefaultInstance();
+            Number number = realm.where(retrieveItemClass()).max("id");
+            if (number != null) {
+                return number.intValue() + 1;
+            } else {
+                return 0;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return 0;
+        }
     }
 }

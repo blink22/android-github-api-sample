@@ -23,7 +23,7 @@ public class Repository extends RealmObject {
 
     private String description;
 
-    private Owner owner;
+    private User owner;
 
     public Repository() {
     }
@@ -68,11 +68,11 @@ public class Repository extends RealmObject {
         this.description = description;
     }
 
-    public Owner getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Owner owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 }
