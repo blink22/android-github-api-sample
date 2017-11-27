@@ -1,6 +1,6 @@
 Tools & Technologies
 -- -- -- 
-GitHub API:https://developer.github.com/v3/
+GitHub API: https://developer.github.com/v3/
 
 Butterknife: http://jakewharton.github.io/butterknife/
 Used to link resources id with their objects.
