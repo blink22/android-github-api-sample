@@ -5,12 +5,8 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.repos.src.services.GitHubService;
-import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import java.io.IOException;
 
 import io.realm.RealmObject;
 import retrofit.Callback;
@@ -23,6 +19,7 @@ import retrofit.Retrofit;
 public class ApiBuilder {
 
     private static final OkHttpClient CLIENT = new OkHttpClient();
+
     // To solve conflicts between gson and realm
     private static Gson gson = new GsonBuilder()
             .setExclusionStrategies(new ExclusionStrategy() {
@@ -37,23 +34,29 @@ public class ApiBuilder {
                 }
             })
             .create();
+
     private static final Retrofit RETROFIT = new Retrofit.Builder()
             .baseUrl(Constants.SERVER_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(CLIENT)
             .build();
+
     private static GitHubService gitHubService;
 
     static {
-        CLIENT.interceptors().add(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request.Builder request = chain.request()
-                        .newBuilder();
-                Response response = chain.proceed(request.build());
+        CLIENT.interceptors().add(chain -> {
+            Request original = chain.request();
 
-                return response;
-            }
+            // Depend on default authorization instead of access-token authorization
+            /*
+                HttpUrl originalHttpUrl = original.httpUrl();
+                HttpUrl url = originalHttpUrl.newBuilder()
+                        .addQueryParameter("access_token", Constants.ACCESS_TOKEN)
+                        .build();
+            */
+            Request.Builder requestBuilder = original.newBuilder();
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
         });
     }
 
